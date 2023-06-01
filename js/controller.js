@@ -110,3 +110,15 @@ dom.overflowsContainer.addEventListener('click', function () {
   // Add the hidden classes
   toggleShoppingListModal();
 });
+
+dom.shoppingListBtn.addEventListener('click', function () {
+  // Remove hidden class
+  model.showHideCheckoutModal(dom.checkoutContainer);
+  dom.shoppingListContainer.classList.add('shopping-modal-hidden');
+});
+
+dom.checkoutBtn.addEventListener('click', function () {
+  // Remove hidden class
+  model.showHideCheckoutModal(dom.checkoutContainer);
+  dom.overflowsContainer.classList.add('overflow-modal-hidden');
+});

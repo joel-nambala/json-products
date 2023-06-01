@@ -18,7 +18,7 @@ Runs the project in the development server
 
 This commands build the project ready for shipment to the client
 
-### Live Demo
+## Live Demo
 
 You can view the live project at (store-products)[https://json-products.netlify.app].
 

@@ -71,5 +71,11 @@ export const getProductsInCategory = async function (category) {
 export const showShoppingListModal = function (overflowContainer, shoppingListContainer) {
   // Manipulate classes
   overflowContainer.classList.toggle('overflow-modal-hidden');
-  shoppingListContainer.classList.toggle('overflow-modal-hidden');
+  shoppingListContainer.classList.toggle('shopping-modal-hidden');
+};
+
+// Show the success checkout modal
+export const showHideCheckoutModal = function (checkoutContainer) {
+  // Manipulate classes
+  checkoutContainer.classList.toggle('checkout-modal-hidden');
 };

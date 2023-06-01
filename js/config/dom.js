@@ -7,3 +7,6 @@ export const headerShopping = document.querySelector('.header-shopping');
 export const overflowsContainer = document.querySelector('.overflows');
 export const shoppingListContainer = document.querySelector('.shopping-list');
 export const shoppingListCloseBtn = document.querySelector('.shopping-list-close');
+export const checkoutContainer = document.querySelector('.checkout-modal-hidden');
+export const checkoutBtn = document.querySelector('.checkout-btn');
+export const shoppingListBtn = document.querySelector('.shopping-list-btn');

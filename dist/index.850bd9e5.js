@@ -660,6 +660,16 @@ _domJs.overflowsContainer.addEventListener("click", function() {
     // Add the hidden classes
     toggleShoppingListModal();
 });
+_domJs.shoppingListBtn.addEventListener("click", function() {
+    // Remove hidden class
+    _modelJs.showHideCheckoutModal(_domJs.checkoutContainer);
+    _domJs.shoppingListContainer.classList.add("shopping-modal-hidden");
+});
+_domJs.checkoutBtn.addEventListener("click", function() {
+    // Remove hidden class
+    _modelJs.showHideCheckoutModal(_domJs.checkoutContainer);
+    _domJs.overflowsContainer.classList.add("overflow-modal-hidden");
+});
 
 },{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Py0LO","./views/View.js":"iS7pi","./config/dom.js":"7QeJR"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
@@ -2569,6 +2579,7 @@ parcelHelpers.export(exports, "getItemId", ()=>getItemId);
 parcelHelpers.export(exports, "getAllCategories", ()=>getAllCategories);
 parcelHelpers.export(exports, "getProductsInCategory", ()=>getProductsInCategory);
 parcelHelpers.export(exports, "showShoppingListModal", ()=>showShoppingListModal);
+parcelHelpers.export(exports, "showHideCheckoutModal", ()=>showHideCheckoutModal);
 var _config = require("./config/config");
 const fetchProducts = async function() {
     try {
@@ -2621,7 +2632,11 @@ const getProductsInCategory = async function(category) {
 const showShoppingListModal = function(overflowContainer, shoppingListContainer) {
     // Manipulate classes
     overflowContainer.classList.toggle("overflow-modal-hidden");
-    shoppingListContainer.classList.toggle("overflow-modal-hidden");
+    shoppingListContainer.classList.toggle("shopping-modal-hidden");
+};
+const showHideCheckoutModal = function(checkoutContainer) {
+    // Manipulate classes
+    checkoutContainer.classList.toggle("checkout-modal-hidden");
 };
 
 },{"./config/config":"jL1TQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jL1TQ":[function(require,module,exports) {
@@ -2770,6 +2785,9 @@ parcelHelpers.export(exports, "headerShopping", ()=>headerShopping);
 parcelHelpers.export(exports, "overflowsContainer", ()=>overflowsContainer);
 parcelHelpers.export(exports, "shoppingListContainer", ()=>shoppingListContainer);
 parcelHelpers.export(exports, "shoppingListCloseBtn", ()=>shoppingListCloseBtn);
+parcelHelpers.export(exports, "checkoutContainer", ()=>checkoutContainer);
+parcelHelpers.export(exports, "checkoutBtn", ()=>checkoutBtn);
+parcelHelpers.export(exports, "shoppingListBtn", ()=>shoppingListBtn);
 const sidebarContainer = document.querySelector(".sidebar-list");
 const productContainer = document.querySelector(".product");
 const selectContainer = document.querySelector(".header-select");
@@ -2778,6 +2796,9 @@ const headerShopping = document.querySelector(".header-shopping");
 const overflowsContainer = document.querySelector(".overflows");
 const shoppingListContainer = document.querySelector(".shopping-list");
 const shoppingListCloseBtn = document.querySelector(".shopping-list-close");
+const checkoutContainer = document.querySelector(".checkout-modal-hidden");
+const checkoutBtn = document.querySelector(".checkout-btn");
+const shoppingListBtn = document.querySelector(".shopping-list-btn");
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["1Mgbh","1GgH0"], "1GgH0", "parcelRequire8946")
 

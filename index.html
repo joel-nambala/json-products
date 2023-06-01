@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer type="module" src="js/controller.js"></script>
+    <title>JSON Products</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="header-logo">
+          <h2 class="header-title">STORE</h2>
+        </div>
+        <form class="header-searchbar">
+          <input
+            type="text"
+            class="header-input"
+            placeholder="Search for a product..."
+          />
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        </form>
+        <div class="header-buttons">
+          <div class="header-categories">
+            <select name="select" id="select" class="header-select">
+              <option disabled value="">--select category--</option>
+            </select>
+          </div>
+          <div class="header-add">
+            <p class="header-button">
+              <i class="fa-regular fa-pen-to-square header-icon"></i> Add
+              product
+            </p>
+          </div>
+          <div class="header-shopping-list">
+            <p class="header-shopping">
+              <i class="fa-sharp fa-solid fa-cart-plus header-icon"></i>
+              Shopping cart
+              <small class="header-product-value">0</small>
+            </p>
+          </div>
+        </div>
+      </div>
+      <aside class="sidebar">
+        <ul class="sidebar-list"></ul>
+        <div class="sidebar-pagination">
+          <div class="sidebar-page sidebar-page-prev" data-page="1">
+            <i class="fa-solid fa-arrow-left pagination-icon"></i> Page 1
+          </div>
+          <div class="sidebar-page sidebar-page-next" data-page="2">
+            Page 2 <i class="fa-solid fa-arrow-right pagination-icon"></i>
+          </div>
+        </div>
+        <footer class="footer">
+          <p class="footer-text">
+            This application was carefully designed and created by
+            <a
+              href="https://joelnambala.netlify.app"
+              target="_blank"
+              class="footer-link"
+              >Joel Nambala</a
+            >
+          </p>
+          <p class="footer-text">Copyright &copy; 2022. All rights reserved</p>
+        </footer>
+      </aside>
+      <main class="product">
+        <div class="product-message">
+          <p class="product-message-icon">
+            <i class="fa-regular fa-face-smile"></i>
+          </p>
+          <p class="product-message-text">
+            Please select a product to view it here. Have fun!
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <div class="overflows overflow-modal-hidden"></div>
+    <div class="shopping-list overflow-modal-hidden">
+      <i class="fa-solid fa-xmark shopping-list-close"></i>
+      <h2 class="shopping-list-title">Shopping list</h2>
+      <table class="shopping-list-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Stock</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img
+                src="https://i.dummyjson.com/data/products/5/thumbnail.jpg"
+                alt="Product Image"
+              />
+            </td>
+            <td>Macbook Pro Air</td>
+            <td>Laptops</td>
+            <td>44 units</td>
+            <td>$ 6700</td>
+            <td class="total-items-container">
+              <i
+                class="fa-solid fa-chevron-up total-items total-items-increase"
+              ></i>
+              <p class="shopping-list-total-items">1</p>
+              <i
+                class="fa-solid fa-chevron-down total-items total-items-reduce"
+              ></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://i.dummyjson.com/data/products/5/thumbnail.jpg"
+                alt="Product Image"
+              />
+            </td>
+            <td>Macbook Pro Air</td>
+            <td>Laptops</td>
+            <td>44 units</td>
+            <td>$ 6700</td>
+            <td class="total-items-container">
+              <i
+                class="fa-solid fa-chevron-up total-items total-items-increase"
+              ></i>
+              <p class="shopping-list-total-items">1</p>
+              <i
+                class="fa-solid fa-chevron-down total-items total-items-reduce"
+              ></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://i.dummyjson.com/data/products/5/thumbnail.jpg"
+                alt="Product Image"
+              />
+            </td>
+            <td>Macbook Pro Air</td>
+            <td>Laptops</td>
+            <td>44 units</td>
+            <td>$ 6700</td>
+            <td class="total-items-container">
+              <i
+                class="fa-solid fa-chevron-up total-items total-items-increase"
+              ></i>
+              <p class="shopping-list-total-items">1</p>
+              <i
+                class="fa-solid fa-chevron-down total-items total-items-reduce"
+              ></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://i.dummyjson.com/data/products/5/thumbnail.jpg"
+                alt="Product Image"
+              />
+            </td>
+            <td>Macbook Pro Air</td>
+            <td>Laptops</td>
+            <td>44 units</td>
+            <td>$ 6700</td>
+            <td class="total-items-container">
+              <i
+                class="fa-solid fa-chevron-up total-items total-items-increase"
+              ></i>
+              <p class="shopping-list-total-items">1</p>
+              <i
+                class="fa-solid fa-chevron-down total-items total-items-reduce"
+              ></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://i.dummyjson.com/data/products/5/thumbnail.jpg"
+                alt="Product Image"
+              />
+            </td>
+            <td>Macbook Pro Air</td>
+            <td>Laptops</td>
+            <td>44 units</td>
+            <td>$ 6700</td>
+            <td class="total-items-container">
+              <i
+                class="fa-solid fa-chevron-up total-items total-items-increase"
+              ></i>
+              <p class="shopping-list-total-items">1</p>
+              <i
+                class="fa-solid fa-chevron-down total-items total-items-reduce"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="total-price">
+        Total price <span class="total-price-tag">$ 78999</span>
+      </h2>
+      <button class="shopping-list-btn">Checkout</button>
+    </div>
+  </body>
+</html>

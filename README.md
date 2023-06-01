@@ -20,8 +20,8 @@ This commands build the project ready for shipment to the client
 
 ### Live Demo
 
-You can view the live project at (store-products)['https://store-products.netlify.app'].
+You can view the live project at (store-products)[https://json-products.netlify.app].
 
 ### Designer
 
-The project was carefully designed and build by (Joel Nambala)['https://joelnambala.netlify.app'].
+The project was carefully designed and build by (Joel Nambala)[https://joelnambala.netlify.app].

@@ -1,4 +1,4 @@
-# Producs API
+# Products API
 
 This application loads data from an external API and displays them on the beautiful user inteface. The application is created using cutting age modern technologies.
 

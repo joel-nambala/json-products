@@ -6,6 +6,7 @@ import 'regenerator-runtime/runtime';
 import * as model from './model.js';
 import { app } from './views/View.js';
 import * as dom from './config/dom.js';
+import { shoppingListArr } from './config/config.js';
 
 const controller = async function () {
   // Display the spinner
@@ -82,6 +83,41 @@ const controller = async function () {
         // Display the UI
         app.displaySidebarResults(item, dom.sidebarContainer);
       });
+    });
+
+    // Event listeners to the product page
+    dom.productContainer.addEventListener('click', async function (e) {
+      // Traget item
+      const shoppingBtn = e.target.classList.contains('product-shopping');
+      const shoppingBtnIcon = e.target.classList.contains('shopping-icon');
+
+      if (shoppingBtn || shoppingBtnIcon) {
+        // Select the parent element
+        const parentElement = e.target.closest('.product');
+
+        // Select the button element
+        const clickedItem = parentElement.querySelector('.product-shopping');
+
+        // Get the product id
+        const productId = +clickedItem.dataset.item;
+
+        // Get the product
+        const shoppingList = await model.shoppingItem(productId);
+
+        // Get the length of the array
+        const totalItems = shoppingList.length;
+
+        // Update the shopping cart total
+        app.updateShoppingCartLength(dom.shoppingTotalItems, totalItems);
+
+        // Clear the shopping list container
+        dom.shoppingCartContainer.innerHTML = '';
+
+        // Update shopping cart
+        shoppingList.forEach(function (item) {
+          app.updateShoppingCart(dom.shoppingCartContainer, item);
+        });
+      }
     });
   } catch (err) {
     console.log(err.message);

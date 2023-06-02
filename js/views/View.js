@@ -70,10 +70,10 @@ class App {
         <p class="product-price">${currencyFormatter(product.price)}</p>
         <p class="product-stock">${product.stock} units left</p>
         <p class="product-rating">${product.rating} rating</p>
-        <p class="product-shopping">
+        <button class="product-shopping" data-item="${product.id}">
           <i class="fa-sharp fa-solid fa-cart-plus shopping-icon"></i>
           <i class="fa-solid fa-check shopping-icon hide-shopping-icon"></i>
-        </p>
+        </button>
       </div>
       <p class="product-description">${product.description}</p>
       <div class="product-links">
@@ -81,6 +81,37 @@ class App {
           >Check out more <i class="fa-solid fa-arrow-right"></i
         ></a>
       </div>
+    `;
+
+    // Append to the UI
+    container.insertAdjacentHTML('beforeend', html);
+  }
+
+  updateShoppingCartLength(element, total) {
+    element.textContent = total;
+  }
+
+  updateShoppingCart(container, product) {
+    // Generate markup
+    const html = `
+      <tr>
+        <td>
+          <img src="${product.productImage}" alt="${product.productTitle}"/>
+        </td>
+        <td>${product.productTitle}</td>
+        <td>${product.productCategory}</td>
+        <td>${product.productStock} units</td>
+        <td>${product.productPrice}</td>
+        <td class="total-items-container">
+          <i
+            class="fa-solid fa-chevron-up total-items total-items-increase"
+          ></i>
+          <p class="shopping-list-total-items">1</p>
+          <i
+            class="fa-solid fa-chevron-down total-items total-items-reduce"
+          ></i>
+        </td>
+      </tr>
     `;
 
     // Append to the UI

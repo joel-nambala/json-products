@@ -279,6 +279,7 @@ body {
   width: 4rem;
   background-color: var(--color-primary);
   cursor: pointer;
+  border: none;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
@@ -363,6 +364,11 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+.table-height {
+  height: 30rem;
+  overflow: scroll;
 }
 
 .shopping-list {

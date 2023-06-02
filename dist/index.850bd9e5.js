@@ -581,6 +581,7 @@ var _runtime = require("regenerator-runtime/runtime");
 var _modelJs = require("./model.js");
 var _viewJs = require("./views/View.js");
 var _domJs = require("./config/dom.js");
+var _configJs = require("./config/config.js");
 const controller = async function() {
     // Display the spinner
     (0, _viewJs.app).displaySpinner(_domJs.sidebarContainer);
@@ -638,6 +639,32 @@ const controller = async function() {
                 (0, _viewJs.app).displaySidebarResults(item, _domJs.sidebarContainer);
             });
         });
+        // Event listeners to the product page
+        _domJs.productContainer.addEventListener("click", async function(e) {
+            // Traget item
+            const shoppingBtn = e.target.classList.contains("product-shopping");
+            const shoppingBtnIcon = e.target.classList.contains("shopping-icon");
+            if (shoppingBtn || shoppingBtnIcon) {
+                // Select the parent element
+                const parentElement = e.target.closest(".product");
+                // Select the button element
+                const clickedItem = parentElement.querySelector(".product-shopping");
+                // Get the product id
+                const productId = +clickedItem.dataset.item;
+                // Get the product
+                const shoppingList = await _modelJs.shoppingItem(productId);
+                // Get the length of the array
+                const totalItems = shoppingList.length;
+                // Update the shopping cart total
+                (0, _viewJs.app).updateShoppingCartLength(_domJs.shoppingTotalItems, totalItems);
+                // Clear the shopping list container
+                _domJs.shoppingCartContainer.innerHTML = "";
+                // Update shopping cart
+                shoppingList.forEach(function(item) {
+                    (0, _viewJs.app).updateShoppingCart(_domJs.shoppingCartContainer, item);
+                });
+            }
+        });
     } catch (err) {
         console.log(err.message);
     }
@@ -671,7 +698,7 @@ _domJs.checkoutBtn.addEventListener("click", function() {
     _domJs.overflowsContainer.classList.add("overflow-modal-hidden");
 });
 
-},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Py0LO","./views/View.js":"iS7pi","./config/dom.js":"7QeJR"}],"49tUX":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Py0LO","./views/View.js":"iS7pi","./config/dom.js":"7QeJR","./config/config.js":"jL1TQ"}],"49tUX":[function(require,module,exports) {
 // TODO: Remove this module from `core-js@4` since it's split to modules listed below
 require("52e9b3eefbbce1ed");
 require("292fa64716f5b39e");
@@ -2580,6 +2607,7 @@ parcelHelpers.export(exports, "getAllCategories", ()=>getAllCategories);
 parcelHelpers.export(exports, "getProductsInCategory", ()=>getProductsInCategory);
 parcelHelpers.export(exports, "showShoppingListModal", ()=>showShoppingListModal);
 parcelHelpers.export(exports, "showHideCheckoutModal", ()=>showHideCheckoutModal);
+parcelHelpers.export(exports, "shoppingItem", ()=>shoppingItem);
 var _config = require("./config/config");
 const fetchProducts = async function() {
     try {
@@ -2638,13 +2666,34 @@ const showHideCheckoutModal = function(checkoutContainer) {
     // Manipulate classes
     checkoutContainer.classList.toggle("checkout-modal-hidden");
 };
+const shoppingItem = async function(id) {
+    // Fetch the products
+    const products = await fetchProducts();
+    // Get the selected item
+    const selectedProduct = products.find((product)=>product.id === id);
+    // Create a shopping object
+    const shopping = {
+        productImage: selectedProduct.thumbnail,
+        productTitle: selectedProduct.title,
+        productCategory: selectedProduct.category,
+        productStock: selectedProduct.stock,
+        productPrice: selectedProduct.price,
+        productId: selectedProduct.id
+    };
+    // Push the object to the array
+    (0, _config.shoppingListArr).push(shopping);
+    // Return the array
+    return 0, _config.shoppingListArr;
+};
 
 },{"./config/config":"jL1TQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jL1TQ":[function(require,module,exports) {
 // State variables
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "API_URL", ()=>API_URL);
+parcelHelpers.export(exports, "shoppingListArr", ()=>shoppingListArr);
 const API_URL = "https://dummyjson.com/products";
+const shoppingListArr = [];
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -2738,10 +2787,10 @@ class App {
         <p class="product-price">${(0, _helpers.currencyFormatter)(product.price)}</p>
         <p class="product-stock">${product.stock} units left</p>
         <p class="product-rating">${product.rating} rating</p>
-        <p class="product-shopping">
+        <button class="product-shopping" data-item="${product.id}">
           <i class="fa-sharp fa-solid fa-cart-plus shopping-icon"></i>
           <i class="fa-solid fa-check shopping-icon hide-shopping-icon"></i>
-        </p>
+        </button>
       </div>
       <p class="product-description">${product.description}</p>
       <div class="product-links">
@@ -2749,6 +2798,34 @@ class App {
           >Check out more <i class="fa-solid fa-arrow-right"></i
         ></a>
       </div>
+    `;
+        // Append to the UI
+        container.insertAdjacentHTML("beforeend", html);
+    }
+    updateShoppingCartLength(element, total) {
+        element.textContent = total;
+    }
+    updateShoppingCart(container, product) {
+        // Generate markup
+        const html = `
+      <tr>
+        <td>
+          <img src="${product.productImage}" alt="${product.productTitle}"/>
+        </td>
+        <td>${product.productTitle}</td>
+        <td>${product.productCategory}</td>
+        <td>${product.productStock} units</td>
+        <td>${product.productPrice}</td>
+        <td class="total-items-container">
+          <i
+            class="fa-solid fa-chevron-up total-items total-items-increase"
+          ></i>
+          <p class="shopping-list-total-items">1</p>
+          <i
+            class="fa-solid fa-chevron-down total-items total-items-reduce"
+          ></i>
+        </td>
+      </tr>
     `;
         // Append to the UI
         container.insertAdjacentHTML("beforeend", html);
@@ -2788,6 +2865,8 @@ parcelHelpers.export(exports, "shoppingListCloseBtn", ()=>shoppingListCloseBtn);
 parcelHelpers.export(exports, "checkoutContainer", ()=>checkoutContainer);
 parcelHelpers.export(exports, "checkoutBtn", ()=>checkoutBtn);
 parcelHelpers.export(exports, "shoppingListBtn", ()=>shoppingListBtn);
+parcelHelpers.export(exports, "shoppingTotalItems", ()=>shoppingTotalItems);
+parcelHelpers.export(exports, "shoppingCartContainer", ()=>shoppingCartContainer);
 const sidebarContainer = document.querySelector(".sidebar-list");
 const productContainer = document.querySelector(".product");
 const selectContainer = document.querySelector(".header-select");
@@ -2799,6 +2878,8 @@ const shoppingListCloseBtn = document.querySelector(".shopping-list-close");
 const checkoutContainer = document.querySelector(".checkout-modal-hidden");
 const checkoutBtn = document.querySelector(".checkout-btn");
 const shoppingListBtn = document.querySelector(".shopping-list-btn");
+const shoppingTotalItems = document.querySelector(".header-product-value");
+const shoppingCartContainer = document.querySelector(".shopping-list-body");
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["1Mgbh","1GgH0"], "1GgH0", "parcelRequire8946")
 

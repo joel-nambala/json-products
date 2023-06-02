@@ -1,5 +1,5 @@
 // Local imports
-import { API_URL } from './config/config';
+import { API_URL, shoppingListArr } from './config/config';
 
 // Get the products
 export const fetchProducts = async function () {
@@ -78,4 +78,29 @@ export const showShoppingListModal = function (overflowContainer, shoppingListCo
 export const showHideCheckoutModal = function (checkoutContainer) {
   // Manipulate classes
   checkoutContainer.classList.toggle('checkout-modal-hidden');
+};
+
+// Get the clicked item
+export const shoppingItem = async function (id) {
+  // Fetch the products
+  const products = await fetchProducts();
+
+  // Get the selected item
+  const selectedProduct = products.find(product => product.id === id);
+
+  // Create a shopping object
+  const shopping = {
+    productImage: selectedProduct.thumbnail,
+    productTitle: selectedProduct.title,
+    productCategory: selectedProduct.category,
+    productStock: selectedProduct.stock,
+    productPrice: selectedProduct.price,
+    productId: selectedProduct.id,
+  };
+
+  // Push the object to the array
+  shoppingListArr.push(shopping);
+
+  // Return the array
+  return shoppingListArr;
 };

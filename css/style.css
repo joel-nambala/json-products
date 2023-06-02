@@ -295,6 +295,7 @@ body {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border: none;
 }
 
 .shopping-icon {
@@ -375,6 +376,11 @@ body {
   backdrop-filter: blur(0.6rem);
   z-index: 100;
   transition: all 0.6s ease;
+}
+
+.table-height {
+  height: 30rem;
+  overflow: scroll;
 }
 
 .shopping-list {
